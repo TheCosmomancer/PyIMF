@@ -2,3 +2,4 @@
 ./.envrc
 ./test.py
 ./test.txt
+./__pycache__
