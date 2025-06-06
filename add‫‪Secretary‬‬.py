@@ -1,4 +1,6 @@
 from classes import *
+db.connect()
+db.create_tables([User, Messege, File])
 firstname = input('first name: ')
 lastname = input('last name: ')
 codename = 'Secretary'

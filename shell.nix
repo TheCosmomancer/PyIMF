@@ -2,10 +2,10 @@
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    python312Packages.peewee
-    python312Packages.xattr
-    python312Packages.cryptography
-    python312Packages.tkinter
-    figlet
+    python313Packages.peewee
+    python313Packages.cryptography
+    python313Packages.tkinter
+    python313Packages.levenshtein
+    python313Packages.nltk
   ];
 }

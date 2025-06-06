@@ -1,0 +1,4 @@
+./vault
+./.envrc
+./test.py
+./test.txt
