@@ -67,6 +67,13 @@ def main():
         sendMessege('login¶'+loginUsername.get()+'¶'+loginPassword.get())
         answer = reciveMessege()
         if answer == 'agent':
+            sendMessege('getmessages')
+            firstmessage = reciveMessege()
+            if firstmessage == '¶':
+                firstmessage = 'you dont have any messaages'
+            else:
+                firstmessage.split('¶')
+                print(firstmessage[0],firstmessage[1])
             def sendusermessege():
                 sendMessege('usermesseage¶'+reciver.get()+'¶'+textmessege.get('1.0',END))
                 messegesendanswer = reciveMessege()
@@ -112,6 +119,22 @@ def main():
                 todo = autocorrect(todo)
                 broadcasttext.delete('1.0',END)
                 broadcasttext.insert('1.0',todo)
+            def gotolastmessage():
+                sendMessege('lastmessage')
+                answer = reciveMessege()
+                if answer != '¶':
+                    answer.split('¶')
+                    print(firstmessage[0],firstmessage[1])
+                    messagetextsender.config(text=answer[0])
+                    messagetext.config(text=answer[1])
+            def gotonextmessage():
+                sendMessege('nextmessage')
+                answer = reciveMessege()
+                if answer != '¶':
+                    answer.split('¶')
+                    print(firstmessage[0],firstmessage[1])
+                    messagetextsender.config(text=answer[0])
+                    messagetext.config(text=answer[1])
             mainwindow = Tk()
             loginWindow.destroy()
             tabman = ttk.Notebook(mainwindow)
@@ -135,7 +158,15 @@ def main():
             messman.add(sendTab,text='send messages')
             messman.add(broadcastTab,text='broadcast a message')
             messman.pack()
-            #see messeges #TODO
+            #see messeges
+            lastmessagebutton = Button(inboxTab,text='<',command=gotolastmessage)
+            lastmessagebutton.pack()
+            messagetextsender = Label(inboxTab,text=firstmessage[0])
+            messagetextsender.pack()
+            messagetext = Label(inboxTab,text=firstmessage[1])
+            messagetext.pack()
+            nextmessagebutton = Button(inboxTab,text='>',command=gotonextmessage)
+            nextmessagebutton.pack()
             #send messeges
             Label(sendTab,text='select a recepiant').pack()
             reciver = Entry(sendTab,font = ('Arial',15))
@@ -164,7 +195,7 @@ def main():
                 filewpath.delete(0,END)
                 filewpath.insert(0,filepath)
             def newfile():
-                sendMessege('newafile¶'+filewpath.get()+'¶'+str(agentlevel.get()+1))
+                sendMessege('newafile¶'+filewpath.get()+'¶'+str(filelevel.get()+1))
                 answer = reciveMessege()
                 if answer == 'agent':
                     Label(addfilesTab,text='file created/added').pack()
@@ -181,6 +212,7 @@ def main():
                         topLevel.destroy()
                     def  deletefile():
                         sendMessege('deleteopenfile¶.')
+                        topLevel.destroy()
                     fileContent = openfileanswer
                     topLevel = Toplevel(mainwindow)
                     text = Text(topLevel)
@@ -193,7 +225,7 @@ def main():
                     deletebutton = Button(topLevel,text='delete file',command=deletefile)
                     deletebutton.pack()
             def makenewagent():
-                sendMessege('newagent¶'+firstname.get()+'¶'+lastname.get()+'¶'+newagentcodename.get()+'¶'+str(filelevel.get()+1)+'¶'+agentpassowrd.get())
+                sendMessege('newagent¶'+firstname.get()+'¶'+lastname.get()+'¶'+newagentcodename.get()+'¶'+str(agentlevel.get()+1)+'¶'+agentpassowrd.get())
                 answer = reciveMessege()
                 if answer == 'agent':
                     Label(agentTab,text='aget created').pack()
@@ -201,8 +233,9 @@ def main():
                     Label(agentTab,text='unable to create agent please try again').pack()
             def deleteagent():
                 sendMessege('deleteagent¶'+codename2kill.get())
+                answer = reciveMessege()
                 if answer == 'agent':
-                    Label(deleteagenttab,text='aget deleted').pack()
+                    Label(deleteagenttab,text='agent deleted').pack()
                 else:
                     Label(deleteagenttab,text='unable to delete agent please try again').pack()
             mainwindow = Tk()

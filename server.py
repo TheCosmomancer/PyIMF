@@ -22,6 +22,26 @@ def clientHandel(conn,addr):
         if messege == DISCONNECT:
             print(f'{addr} disconnected')
             break
+        elif messege == 'getmessages':
+            messagelist = list(Messege.select().where(Messege.receiver == user))
+            lenmessagelist = len(messagelist)
+            messagelistvar = 0
+            if lenmessagelist > 0:
+                sendMessege(messagelist[messagelistvar].sender+'¶'+messagelist[messagelistvar].content,conn)
+            else:
+                sendMessege('¶',conn)
+        elif messege == 'lastmessage':
+            if messagelistvar -1 > 0:
+                messagelistvar -= 1
+                sendMessege(messagelist[messagelistvar].sender+'¶'+messagelist[messagelistvar].content,conn)
+            else:
+                sendMessege('¶',conn)
+        elif messege == 'nextmessage':
+            if messagelistvar +1 < lenmessagelist:
+                messagelistvar += 1
+                sendMessege(messagelist[messagelistvar].sender+'¶'+messagelist[messagelistvar].content,conn)
+            else:
+                sendMessege('¶',conn)
         else:
             messege = messege.split('¶')
             if messege[0] == 'login':
@@ -40,11 +60,11 @@ def clientHandel(conn,addr):
                 except:
                     sendMessege('failed',conn)
             elif messege[0] == 'deleteagent':
-                # try:
-                    User.delete(messege[1])
+                try:
+                    User.removeuser(messege[1])
                     sendMessege('agent',conn)
-                # except:
-                #     sendMessege('failed',conn)
+                except:
+                    sendMessege('failed',conn)
             elif messege[0] == 'usermesseage':
                 try:
                     Messege.sendMessege(user.codename,messege[1],messege[2])

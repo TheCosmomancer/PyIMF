@@ -48,7 +48,7 @@ class User(Model):
         except:
             return None
     @staticmethod
-    def delete (codename):
+    def removeuser (codename):
         user = User.get(User.codename == codename)
         messegaes = list(Messege.select().where(Messege.receiver == user))
         for _ in messegaes:
@@ -92,7 +92,7 @@ class File(Model):
     def decrypt(filename):
         with open(filename, 'rb') as enc_file:
             encrypted = enc_file.read()
-        return str(fernet.decrypt(encrypted))
+        return fernet.decrypt(encrypted).decode('utf-8')
     @staticmethod
     def addOrCreate(name,level):
         if '/' not in name:
