@@ -70,9 +70,9 @@ def main():
             sendMessege('getmessages')
             firstmessage = reciveMessege()
             if firstmessage == '¶':
-                firstmessage = 'you dont have any messaages'
+                firstmessage = ['system','you dont have any messaages']
             else:
-                firstmessage.split('¶')
+                firstmessage = firstmessage.split('¶')
                 print(firstmessage[0],firstmessage[1])
             def sendusermessege():
                 sendMessege('usermesseage¶'+reciver.get()+'¶'+textmessege.get('1.0',END))
@@ -123,7 +123,7 @@ def main():
                 sendMessege('lastmessage')
                 answer = reciveMessege()
                 if answer != '¶':
-                    answer.split('¶')
+                    answer = answer.split('¶')
                     print(firstmessage[0],firstmessage[1])
                     messagetextsender.config(text=answer[0])
                     messagetext.config(text=answer[1])
@@ -131,7 +131,7 @@ def main():
                 sendMessege('nextmessage')
                 answer = reciveMessege()
                 if answer != '¶':
-                    answer.split('¶')
+                    answer = answer.split('¶')
                     print(firstmessage[0],firstmessage[1])
                     messagetextsender.config(text=answer[0])
                     messagetext.config(text=answer[1])

@@ -31,7 +31,7 @@ def clientHandel(conn,addr):
             else:
                 sendMessege('¶',conn)
         elif messege == 'lastmessage':
-            if messagelistvar -1 > 0:
+            if messagelistvar -1 >= 0:
                 messagelistvar -= 1
                 sendMessege(messagelist[messagelistvar].sender+'¶'+messagelist[messagelistvar].content,conn)
             else:
