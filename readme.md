@@ -1,6 +1,6 @@
 # Secure File & Messaging System
 
-A client-server application for managing encrypted files and internal messaging with role-based access control.
+A client-server application for managing encrypted files and internal messaging with role-based access control. Written for Advanced programming class project.
 
 ## Features
 
